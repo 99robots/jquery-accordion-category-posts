@@ -1,8 +1,8 @@
 === Plugin Name ===
-Contributors: 99robots, charliepatel
+Contributors: 99robots, charliepatel, DraftPress
 Tags: jquery accordion category, list category posts in jquery accordion
-Requires at least: 3.0.1
-Tested up to: 5.7.2
+Requires at least: 4.9
+Tested up to: 5.8.1
 Stable tag: 2.1
 
 A simple post listing by category widget using jQuery UI Accordion
@@ -40,9 +40,10 @@ the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1
 2. This is the second screen shot
 
 == Changelog ==
-= 2.1 =
-* UPDATED: Compatibility with WordPress 5.7.2
-* FIXED: Deprecated functions, notices & errors
+
+= 2.1 = 2021-09-21
+* UPDATED: Compatibility with WordPress 5.8.1
+* FIXED: Deprecated functions
 
 = 2.0 =
 * UPDATED: Compatibility with WordPress 5.2.3

@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: jQuery Accordion Category Posts
-Plugin URI: https://99robots.com/products/
+Plugin URI: https://draftpress.com/products
 Description: A simple post listing by category widget usign jQuery UI Accordion
 Version: 2.1
-Author: 99 Robots
-Author URI: https://99robots.com/products/
+Author: DraftPress
+Author URI: https://draftpress.com
 */
 
 // INITIAL VARIABLES FUNCTION
