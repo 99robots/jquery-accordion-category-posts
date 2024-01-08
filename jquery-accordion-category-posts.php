@@ -106,25 +106,72 @@ function nnr_admin_update()
     }
 
     $CreateForm = '<div style="margin-top:60px;">';
-    if (isset($_POST['submit'])) { //Getting admin form update
-        $nnr_numcat = sanitize_text_field($_REQUEST['numcats']);
-        $nnr_numpost = sanitize_text_field($_REQUEST['numposts']);
-        update_option('nnr_numcat', $nnr_numcat);
-        update_option('nnr_numpost', $nnr_numpost);
-        $CreateForm .= '<strong>Options updated</strong>.<br /><br />';
-    }
-    $CreateForm .= '<h2>jQuery UI Accordion Categories Options</h2>';
-    $CreateForm .= '<form name="form1" method="post" action="' . $_SERVER["REQUEST_URI"] . '">';
-    $CreateForm .= 'Number of categories to be displayed: ';
-    $CreateForm .= '<input type="text" name="numcats" value=' . get_option('nnr_numcat') . '><br />';
-    $CreateForm .= 'Number of posts to be displayed under each category: ';
-    $CreateForm .= '<input type="text" name="numposts" value=' . get_option('nnr_numpost') . '><br />';
-    $CreateForm .= '<br /><input type="submit" value="Update Options" name="submit"><br />';
-    $CreateForm .= '</form>';
-    $CreateForm .= '<br /><br />jQuery UI Accordion Categories plugin developed by <a href="https://www.99robots.com/" target="_blank">99 Robots</a>';
-    $CreateForm .= '</div>';
+    if ( isset( $_POST['submit'] ) && isset( $_POST['wp_nonce'] ) ) {
+        
+        // Verify the nonce.
+        if (wp_verify_nonce($_POST['wp_nonce'], 'nnr_options_form_nonce')) {
 
-    echo $CreateForm;
+            //Getting admin form update.
+            $nnr_numcat = sanitize_text_field($_REQUEST['numcats']);
+            $nnr_numpost = sanitize_text_field($_REQUEST['numposts']);
+            update_option('nnr_numcat', $nnr_numcat);
+            update_option('nnr_numpost', $nnr_numpost);
+            $CreateForm .= '<strong>Options updated</strong>.<br /><br />';
+        } else {
+            // Nonce verification failed, handle the error or redirect
+            $CreateForm .= '<strong>Error: Nonce verification failed</strong>.<br /><br />';
+        }
+    }
+
+    // check the query string contains _wpnonce.
+    if(!isset( $_GET['_wpnonce'] ) ) {
+
+        // action=edit&popup_id=1 please add it to the url.
+        if ( isset( $_GET['page'] ) && 'nnr-options' === $_GET['page'] ) {
+            $new_url = add_query_arg(
+                array(
+                    'page' => 'nnr-options',
+                    '_wpnonce' => wp_create_nonce( 'nnr_options_nonce' ),
+                ),
+                admin_url('options-general.php')
+            );
+        }
+        else {
+
+            $new_url = add_query_arg(
+                array(
+                    'page' => 'nnr-options',
+                    '_wpnonce' => wp_create_nonce( 'nnr_options_nonce' ),
+                ),
+                admin_url('options-general.php')
+            );
+
+        }
+
+        ?>
+        <script type="text/javascript">
+            window.location = "<?php echo $new_url; ?>";
+        </script>
+        <?php
+
+
+    } else {
+
+        $CreateForm .= '<h2>jQuery UI Accordion Categories Options</h2>';
+        $CreateForm .= '<form name="form1" method="post" action="' . $_SERVER["REQUEST_URI"] . '">';
+        $CreateForm .= 'Number of categories to be displayed: ';
+        $CreateForm .= '<input type="text" name="numcats" value=' . get_option('nnr_numcat') . '><br />';
+        $CreateForm .= 'Number of posts to be displayed under each category: ';
+        $CreateForm .= '<input type="text" name="numposts" value=' . get_option('nnr_numpost') . '><br />';
+        // Add nonce field.
+        $CreateForm .= wp_nonce_field( 'nnr_options_form_nonce', 'wp_nonce' );
+        $CreateForm .= '<br /><input type="submit" value="Update Options" name="submit"><br />';
+        $CreateForm .= '</form>';
+        $CreateForm .= '<br /><br />jQuery UI Accordion Categories plugin developed by <a href="https://www.99robots.com/" target="_blank">99 Robots</a>';
+        $CreateForm .= '</div>';
+
+        echo $CreateForm;
+    }
 
 }
 

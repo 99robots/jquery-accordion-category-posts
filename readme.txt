@@ -2,8 +2,10 @@
 Contributors: 99robots, charliepatel, DraftPress
 Tags: jquery accordion category, list category posts in jquery accordion
 Requires at least: 4.9
-Tested up to: 5.8.1
+Tested up to: 6.4.2
 Stable tag: 2.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A simple post listing by category widget using jQuery UI Accordion
 
@@ -40,6 +42,10 @@ the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1
 2. This is the second screen shot
 
 == Changelog ==
+
+= 2.2 = 2024-01-08
+* UPDATED: Compatibility with WordPress 6.4.2
+* FIXED: Nonce verification to address security issues in form processing
 
 = 2.1 = 2021-09-21
 * UPDATED: Compatibility with WordPress 5.8.1
