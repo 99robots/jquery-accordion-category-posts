@@ -3,7 +3,7 @@
 Plugin Name: jQuery Accordion Category Posts
 Plugin URI: https://draftpress.com/products
 Description: A simple post listing by category widget usign jQuery UI Accordion
-Version: 2.1
+Version: 2.2
 Author: DraftPress
 Author URI: https://draftpress.com
 */
